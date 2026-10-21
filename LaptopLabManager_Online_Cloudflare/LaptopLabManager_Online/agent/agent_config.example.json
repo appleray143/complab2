@@ -1,0 +1,8 @@
+{
+  "server_url": "https://YOUR-PROJECT.pages.dev",
+  "pc_number": "PC-01",
+  "device_token": "PASTE_THE_ONE_TIME_TOKEN_FROM_ADMIN_DASHBOARD",
+  "idle_counts_as_inactive_after_seconds": 120,
+  "heartbeat_interval_seconds": 10,
+  "track_recent_urls": false
+}

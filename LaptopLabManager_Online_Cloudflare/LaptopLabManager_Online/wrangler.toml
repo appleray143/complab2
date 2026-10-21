@@ -1,0 +1,8 @@
+name = "laptop-lab-manager-online"
+pages_build_output_dir = "./public"
+compatibility_date = "2026-10-21"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "laptop-lab-manager"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"

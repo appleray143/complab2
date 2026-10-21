@@ -1,0 +1,9 @@
+{
+  "name": "laptop-lab-manager-online",
+  "private": true,
+  "type": "module",
+  "description": "Cloudflare Pages dashboard and scoped Windows lab client agent",
+  "scripts": {
+    "check:python": "python -m py_compile agent/client_agent.py"
+  }
+}

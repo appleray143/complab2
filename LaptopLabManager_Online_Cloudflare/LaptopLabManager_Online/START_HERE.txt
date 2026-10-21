@@ -1,0 +1,18 @@
+LAPTOP LAB MANAGER ONLINE — START HERE
+Developer: Raymond Apostol
+
+This is an online Cloudflare Pages + Functions + D1 project with a visible Windows client agent.
+
+1. Read README.md completely before deploying.
+2. Create a private GitHub repository and upload the contents of this folder.
+3. Create a Cloudflare D1 database, put its ID in wrangler.toml, and apply migrations/0001_init.sql.
+4. Connect the GitHub repo to Cloudflare Pages with output directory: public.
+5. Configure D1 binding named DB and add secrets: ADMIN_USERNAME, ADMIN_PASSWORD, SESSION_SECRET.
+6. Deploy, sign into the Pages website, and use Add PC to create a one-time device token.
+7. On each authorized Windows laptop, copy agent/ as a local folder, copy agent_config.example.json to agent_config.json, fill in the Pages URL, PC number and one-time token, then run run_agent.bat.
+
+Important:
+- Do not commit real device tokens or secrets to GitHub.
+- Website URL history collection is disabled by default and should only be enabled with appropriate notice/approval.
+- Block pauses the managed agent session UI; it does not lock all of Windows or prevent all other applications from running.
+- The agent must be running and the laptop must have internet access to receive remote updates.

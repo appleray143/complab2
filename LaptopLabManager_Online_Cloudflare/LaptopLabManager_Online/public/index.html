@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#102d52">
+  <title>Laptop Lab Manager | Raymond Apostol</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script defer src="/assets/app.js"></script>
+</head>
+<body>
+  <div id="loginView" class="login-page">
+    <div class="login-card">
+      <div class="brand-mark"><span class="brand-icon">▣</span></div>
+      <p class="eyebrow">SCHOOL IT MANAGEMENT</p>
+      <h1>Laptop Lab Manager</h1>
+      <p class="muted">Sign in to manage registered lab laptops.</p>
+      <form id="loginForm">
+        <label for="username">Administrator username</label>
+        <input id="username" autocomplete="username" required maxlength="80" placeholder="Administrator username">
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required maxlength="200" placeholder="Administrator password">
+        <button class="btn primary full" type="submit">Sign in <span aria-hidden="true">→</span></button>
+        <p id="loginError" class="error" role="alert"></p>
+      </form>
+      <div class="login-foot">Developer <strong>Raymond Apostol</strong></div>
+    </div>
+    <p class="login-note">Authorized devices only · Activity collection should be disclosed to users</p>
+  </div>
+
+  <div id="appView" class="app hidden">
+    <aside class="sidebar">
+      <div class="sidebar-brand"><span class="brand-icon">▣</span><div><strong>Lab Manager</strong><small>ADMIN CONSOLE</small></div></div>
+      <div class="nav-label">WORKSPACE</div>
+      <button class="nav-item active" data-view="overview"><span>▦</span> Overview</button>
+      <button class="nav-item" data-view="computers"><span>▣</span> PC Monitoring</button>
+      <button class="nav-item" data-view="messages"><span>✉</span> Messages</button>
+      <div class="sidebar-bottom">
+        <div class="connection-card"><span class="live-dot"></span><div><strong>Cloud service</strong><small id="connectionText">Connected</small></div></div>
+        <div class="developer">Developer: <strong>Raymond Apostol</strong></div>
+        <button id="logoutBtn" class="nav-item logout"><span>↪</span> Sign out</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><p class="eyebrow">LAPTOP USAGE MANAGEMENT</p><h1 id="pageTitle">Dashboard Overview</h1><p id="pageSubtitle" class="muted">Monitor registered laptops and manage active sessions.</p></div>
+        <div class="topbar-right"><div class="secure-pill"><span class="live-dot"></span> Secure session</div><div class="avatar">RA</div></div>
+      </header>
+
+      <section id="overviewView" class="view">
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total registered PCs</span><span class="stat-icon blue">▣</span></div><strong id="statTotal">0</strong><small>Registered devices</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Online now</span><span class="stat-icon green">⌁</span></div><strong id="statOnline">0</strong><small>Checked in recently</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Active session minutes</span><span class="stat-icon violet">◷</span></div><strong id="statMinutes">0</strong><small>Reported today</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Blocked sessions</span><span class="stat-icon orange">⊘</span></div><strong id="statBlocked">0</strong><small>Administrator policy</small></article>
+        </div>
+        <div class="content-grid">
+          <section class="panel wide-panel">
+            <div class="panel-heading"><div><h2>PC Usage Monitor</h2><p class="muted">Live status for registered laptop agents</p></div><button class="btn primary" id="addDeviceBtn">＋ Add PC</button></div>
+            <div class="toolbar"><input id="searchInput" placeholder="Search PC number or username…" aria-label="Search PCs"><button class="btn light" id="refreshBtn">↻ Refresh</button></div>
+            <div class="table-scroll"><table><thead><tr><th>PC NUMBER</th><th>CURRENT USER</th><th>STATUS</th><th>USED / ALLOWED</th><th>RECENT WEBSITE</th><th>CONTROLS</th></tr></thead><tbody id="deviceRows"><tr><td colspan="6" class="empty">Sign in to load devices.</td></tr></tbody></table></div>
+            <div class="table-footer"><span id="deviceCount">0 devices</span><span id="lastUpdated">Not refreshed yet</span></div>
+          </section>
+          <section class="panel side-panel">
+            <div class="panel-heading"><div><h2>Messages</h2><p class="muted">Chat with one connected PC</p></div><span class="stat-icon blue">✉</span></div>
+            <label class="field-label" for="chatDevice">Select PC</label><select id="chatDevice"><option value="">Choose a PC…</option></select>
+            <div id="chatLog" class="chat-log"><div class="chat-empty">Select a PC to view messages.</div></div>
+            <form id="chatForm" class="chat-compose"><input id="chatInput" maxlength="300" placeholder="Write a message…" aria-label="Chat message" required><button class="btn primary" aria-label="Send message" type="submit">➤</button></form>
+            <p class="micro-note">Messages queue while the PC is offline and deliver when its agent reconnects.</p>
+          </section>
+        </div>
+      </section>
+
+      <section id="computersView" class="view hidden">
+        <section class="panel">
+          <div class="panel-heading"><div><h2>PC Monitoring</h2><p class="muted">Create agent registrations and adjust session rules.</p></div><button class="btn primary" id="addDeviceBtn2">＋ Add PC</button></div>
+          <div class="table-scroll"><table><thead><tr><th>PC NUMBER</th><th>COMPUTER</th><th>USERNAME</th><th>STATUS</th><th>USAGE</th><th>ALLOWANCE</th><th>BLOCKED</th><th>RECENT WEBSITE</th></tr></thead><tbody id="computerRows"><tr><td colspan="8" class="empty">No devices loaded.</td></tr></tbody></table></div>
+        </section>
+        <section class="panel help-panel"><h2>About remote actions</h2><p>Time allowances, block/unblock state, and administrator messages are stored online. Agents must be running and connected to receive updates. Blocking pauses the managed agent's session UI; it is not a tamper-proof Windows kiosk lock and cannot prevent use of other applications.</p></section>
+      </section>
+
+      <section id="messagesView" class="view hidden">
+        <section class="panel"><div class="panel-heading"><div><h2>Message Center</h2><p class="muted">Choose a laptop to view its recent conversation.</p></div></div><div id="messageCenter" class="message-center"><p class="muted">Select a PC from the Messages panel on the dashboard.</p></div></section>
+      </section>
+      <footer class="page-footer">Laptop Lab Manager <span>•</span> Developer: Raymond Apostol <span>•</span> Use only on authorized school devices</footer>
+    </main>
+  </div>
+
+  <dialog id="addDeviceDialog" class="modal">
+    <form id="addDeviceForm" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">DEVICE REGISTRATION</p><h2>Add a managed PC</h2><p class="muted">Create a unique device token for its visible client agent.</p></div><button type="button" class="icon-button" id="closeAddDialog" aria-label="Close">×</button></div>
+      <label for="newPcNumber">PC number</label><input id="newPcNumber" required maxlength="24" pattern="[A-Za-z0-9_-]+" placeholder="PC-01">
+      <label for="newComputerName">Computer name / label</label><input id="newComputerName" maxlength="80" placeholder="Computer Lab 01">
+      <label for="newAllowance">Daily time allowance (minutes)</label><input id="newAllowance" type="number" min="0" max="1440" value="60" required>
+      <p id="addDeviceError" class="error" role="alert"></p><button class="btn primary full" type="submit">Create device registration</button>
+    </form>
+    <div id="tokenResult" class="token-result hidden"><div class="token-icon">✓</div><h3>PC registered</h3><p class="muted">Copy this device token now. It is only displayed once. Keep it private and place it only in the matching laptop's <code>agent_config.json</code>.</p><label for="tokenText">Device token</label><textarea id="tokenText" rows="3" readonly></textarea><button class="btn primary full" type="button" id="copyTokenBtn">Copy device token</button><button class="btn light full" type="button" id="doneTokenBtn">Done</button></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
